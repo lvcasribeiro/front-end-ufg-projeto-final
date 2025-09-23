@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15.8
+    container_name: synapsis-db
+    environment:
+      POSTGRES_DB: synapsis
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - synapsis-net
+    volumes:
+      - synapsis-data:/var/lib/postgresql/data
+
+networks:
+  synapsis-net:
+    driver: bridge
+
+volumes:
+  synapsis-data:
+    driver: local
