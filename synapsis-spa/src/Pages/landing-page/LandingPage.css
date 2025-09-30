@@ -1,0 +1,80 @@
+.landing-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-bg {
+  position: fixed;
+  inset: 0; /* top, right, bottom, left = 0 */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+.navbar {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2; /* acima do fundo */
+  color: white;
+}
+
+.logo-text {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.navbar button {
+  padding: 8px 24px;
+  border-radius: 8px;
+  background-color: #06b6d4;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.navbar button:hover {
+  background-color: #22d3ee; 
+}
+
+/* --- Substitua suas regras atuais por estas --- */
+.main-content {
+  flex: 1;
+  height: 100vh; /* garante ocupar a viewport */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centra verticalmente */
+  align-items: center;     /* centra horizontalmente */
+  position: relative;
+  z-index: 2;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+/* centraliza horizontalmente; o translateY puxa um pouco pra cima */
+.hero-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-8vh); /* ajusta aqui: -5vh a -12vh costuma ficar bom */
+}
+
+.hero-text {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(28px, 6.5vw, 80px);
+  line-height: 1.1;
+  max-width: 92%;
+  white-space: normal;
+  z-index: 3;
+  color: white;
+}
+
