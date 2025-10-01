@@ -69,9 +69,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             chain.doFilter(request, response);
 
-        } catch (Exception e) {
-            System.out.println("Erro ao processar o token: " + e.getMessage());
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Erro na autenticação do token.");
+        } catch (Exception ex) {
+            System.out.println("Erro ao processar o token: " + ex.getMessage());
+            //response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Erro na autenticação do token.");
+            throw ex;
         }
     }
 
