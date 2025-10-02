@@ -2,12 +2,14 @@ package br.com.synapsis.synapsis.auth;
 
 import br.com.synapsis.synapsis.auth.dto.LoginRequestDTO;
 import br.com.synapsis.synapsis.auth.dto.LoginResponseDTO;
+import br.com.synapsis.synapsis.shared.exceptions.ConflictException;
 import br.com.synapsis.synapsis.shared.security.JwtService;
 import br.com.synapsis.synapsis.users.UserEntity;
 import br.com.synapsis.synapsis.users.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,14 +30,20 @@ public class AuthService {
     }
 
     public LoginResponseDTO authenticate(LoginRequestDTO request) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.email(), request.password())
-        );
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(request.email(), request.password())
+            );
 
-        User user = (User) authentication.getPrincipal();
-        String token = jwtService.generateToken(user.getUsername());
+            User user = (User) authentication.getPrincipal();
+            String token = jwtService.generateToken(user.getUsername());
 
-        return new LoginResponseDTO(token);
+            return new LoginResponseDTO(token);
+
+        } catch (AuthenticationException ex) {
+            // Lança uma exceção customizada para falha no login
+            throw new ConflictException("Email ou senha inválidos", ex);
+        }
     }
 
     public Long getAuthenticatedUserId() {

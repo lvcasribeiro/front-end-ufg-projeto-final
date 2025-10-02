@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+
 .landing-root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: 'Righteous', sans-serif;
 }
 
 .page-bg {
@@ -19,10 +23,14 @@
   left: 24px;
   right: 24px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: left;
   z-index: 2; /* acima do fundo */
   color: white;
+}
+
+.img-logo {
+  height: 50px;
+  width: 50px;
 }
 
 .logo-text {
@@ -31,6 +39,7 @@
 }
 
 .navbar button {
+  position: relative;
   padding: 8px 24px;
   border-radius: 8px;
   background-color: #06b6d4;
@@ -38,6 +47,7 @@
   border: none;
   cursor: pointer;
   transition: background-color 0.2s;
+  
 }
 
 .navbar button:hover {

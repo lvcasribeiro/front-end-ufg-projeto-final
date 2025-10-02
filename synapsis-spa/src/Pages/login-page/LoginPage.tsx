@@ -1,8 +1,8 @@
-import React from "react";
 import Logo from "../../assets/images/logo-synapsis.png";
 import "./LoginPage.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import BackgroundImage from "../../assets/images/background-img.png";
 
 
 export default function LoginPage() {
@@ -10,6 +10,16 @@ export default function LoginPage() {
 
   return (
     <div className="login-container">
+      <div
+        className="page-bg"
+        style={{ backgroundImage: `url(${BackgroundImage})` }}
+        aria-hidden="true"
+      />
+      <nav className="navbar">
+        <img src={Logo} alt="logo" className="img-logo" />
+        <span className="logo-text">SYNAPSIS</span>
+      </nav>
+
       {/* Coluna Esquerda */}
       <div className="left-section">
         <div className="hero-container">

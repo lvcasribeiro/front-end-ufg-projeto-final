@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "users")
@@ -26,8 +27,14 @@ public class UserEntity {
     @Column(name = "email", nullable = false, length = 255, unique = true)
     String email;
 
-    @Column(name = "password", length = 255)
+    @Column(name = "password", length = 255, nullable = false)
     String password;
+
+    @Column(name = "apelido", length = 255, nullable = false)
+    String apelido;
+
+    @Column(name = "data_nascimento", length = 255, nullable = false)
+    LocalDate dataNascimento;
 
     @Column(name = "remember_token", length = 255)
     String rememberToken;

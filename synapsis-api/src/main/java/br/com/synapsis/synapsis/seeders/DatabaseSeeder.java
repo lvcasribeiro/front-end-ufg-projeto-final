@@ -6,6 +6,9 @@ import br.com.synapsis.synapsis.users.dto.UserInputDTO;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Random;
 
 @Component
@@ -33,7 +36,9 @@ public class DatabaseSeeder implements CommandLineRunner {
                     null,
                     "Administrador",
                     "admin@synapsis.com",
-                    "123456"
+                    "123456",
+                    "admin",
+                    LocalDate.of(1995, 10, 20)
             );
             userService.create(userInputDTO);
         }

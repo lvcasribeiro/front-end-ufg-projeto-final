@@ -2,6 +2,7 @@ import React from "react";
 import "./LandingPage.css";
 import { useNavigate } from "react-router-dom";
 import BackgroundImage from "../../assets/images/background-img.png";
+import Logo from "../../assets/images/logo-synapsis.png";
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ export default function LandingPage() {
 
       {/* Navbar */}
       <nav className="navbar">
+        <img src={Logo} alt="logo" className="img-logo" />
         <span className="logo-text">SYNAPSIS</span>
         <button onClick={() => navigate("/login")}>
           Login

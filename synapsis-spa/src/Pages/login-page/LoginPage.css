@@ -1,10 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
 html, body {
   height: 100%;
   margin: 0;
-  font-family: 'Oswald', sans-serif;
-  background: linear-gradient(to right, #0f172a, #1e293b); /* gradiente total */
+  font-family: 'Righteous', sans-serif;
+}
+
+.page-bg {
+  position: fixed;
+  inset: 0; /* top, right, bottom, left = 0 */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
 }
 
 /* Container principal dividido em 2 colunas com gradiente */
@@ -49,11 +58,12 @@ html, body {
 /* Coluna Direita */
 .right-section {
   flex: 6; /* ocupa metade da tela */
-  display: flex;
+  display: relative;
   align-items: center;
   justify-content: center;
   background: none; /* nada por cima do gradiente do container */
-  margin-left: 10%;
+  margin-left: 50%;
+  z-index: 2;
 }
 
 /* Formulário */
@@ -64,6 +74,7 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  
 }
 
 .form-title {
