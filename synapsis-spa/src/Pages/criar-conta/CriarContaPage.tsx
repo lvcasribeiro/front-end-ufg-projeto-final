@@ -5,6 +5,7 @@ import useSalvarUser from "./hooks/useSalvarUser";
 import type { User } from "../../components/user/types/User";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import BackgroundImage from "../../assets/images/background.jpg";
 
 export default function CriarContaPage() {
   const methods = useForm<User>();
@@ -18,7 +19,7 @@ export default function CriarContaPage() {
       async onSuccess() {
         toast.success("Conta criada com sucesso!");
         console.log("criado");
-        navigate(`./`);
+        navigate(`../`);
       },
       onError() {        
         try {
@@ -33,9 +34,14 @@ export default function CriarContaPage() {
   return (
     <form onSubmit={methods.handleSubmit(onSubmit)}>
     <div className="login-container">
+      <div
+        className="page-bg"
+        style={{ backgroundImage: `url(${BackgroundImage})` }}
+        aria-hidden="true"
+      />
+
       <div className="left-section">
         <div className="hero-container">
-            <img src={Logo} alt="Synapsis Symbol" className="image-center" />
             <h1 className="hero-text">Conecte Ideias</h1>
         </div>
       </div>

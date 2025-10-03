@@ -4,7 +4,6 @@ html, body {
   height: 100%;
   margin: 0;
   font-family: 'Oswald', sans-serif;
-  background: linear-gradient(to right, #0f172a, #1e293b); /* gradiente total */
 }
 
 /* Container principal dividido em 2 colunas com gradiente */
@@ -52,7 +51,6 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: none; /* nada por cima do gradiente do container */
   margin-left: 10%;
 }
 
@@ -86,7 +84,7 @@ html, body {
   padding: 7px;
   border: none;
   border-radius: 8px;
-  background-color: #06b6d4; /* cyan */
+  background-color: #191758; 
   color: white;
   font-size: 18px;
   cursor: pointer;
@@ -94,5 +92,5 @@ html, body {
 }
 
 .login-button:hover {
-  background-color: #22d3ee;
+  background-color: #36323e;
 }

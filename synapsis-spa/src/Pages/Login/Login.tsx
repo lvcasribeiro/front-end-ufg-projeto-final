@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./Login.module.css";
 import { useAuth } from "../../_components/Auth/AuthContext/AuthContext";
+import "./LoginPage.css";
+import { Link } from "react-router-dom";
+import BackgroundImage from "../../assets/images/background.jpg";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -13,53 +15,54 @@ export default function Login() {
     e.preventDefault();
     await login(email, senha);
     if (localStorage.getItem("tokenSynapsis")) {
-      navigate("/");
+      navigate("/home");
     }
   };
 
   return (
-    <div className={styles.loginContainer}>
-      <form onSubmit={handleLogin} className={styles.loginForm}>
-        <h2>Login</h2>
+    <form onSubmit={handleLogin}>
+      <div className="login-container">
+        <div
+          className="page-bg"
+          style={{ backgroundImage: `url(${BackgroundImage})` }}
+          aria-hidden="true"
+        />
 
-        {errorMessage && (
-          <div className={styles.errorMessage}>{errorMessage}</div>
-        )}
-
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            E-mail
-          </label>
-          <input
-            type="email"
-            id="email"
-            className="form-control"
-            placeholder="Digite seu e-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+        {/* Coluna Esquerda */}
+        <div className="left-section">
+          <div className="hero-container">
+            <h1 className="hero-text">Conecte Ideias</h1>
+          </div>
         </div>
 
-        <div className="mb-3">
-          <label htmlFor="senha" className="form-label">
-            Senha
-          </label>
-          <input
-            type="password"
-            id="senha"
-            className="form-control"
-            placeholder="Digite sua senha"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            required
-          />
-        </div>
+        {/* Coluna Direita */}
+        <div className="right-section">
+          <div className="form-container">
+            <h2 className="form-title">Acesse sua conta</h2>
+            <input
+              type="email"
+              id="email"
+              className="input-field"
+              placeholder="Digite seu e-mail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              id="senha"
+              className="input-field"
+              placeholder="Digite sua senha"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              required
+            />
 
-        <button type="submit" className="btn btn-primary w-100">
-          Entrar
-        </button>
-      </form>
+            <button type="submit" className="login-button">Entrar</button>
+            <Link to={"./criar-conta"} className="criar-conta">Não tem conta? crie agora!</Link>
+          </div>
+        </div>
     </div>
+  </form>
   );
 }

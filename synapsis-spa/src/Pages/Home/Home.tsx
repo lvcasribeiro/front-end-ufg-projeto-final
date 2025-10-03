@@ -1,12 +1,18 @@
-import "./Home.css";
+import Layout from "../../components/layout/Layout";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
+
   return (
-    <main className="home-container">
+    <Layout>
       <div className="home-card">
         <h1>Home Page</h1>
         <p>🚀 Projeto iniciado com Vite + React</p>
+        <button onClick={() => navigate("/home/adicionar-nota")}>
+          Adicionar Nota
+        </button>
       </div>
-    </main>
+    </Layout>
   );
 }

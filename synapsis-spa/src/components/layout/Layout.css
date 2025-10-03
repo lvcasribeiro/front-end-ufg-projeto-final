@@ -1,0 +1,17 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.layout-body {
+  display: flex;
+  flex: 1;
+  margin-top: 70px; /* se o header for fixo com 50px */
+}
+
+.layout-content {
+  flex: 1;
+  background-color: #f3f4f6;
+  overflow-y: auto;
+}
