@@ -38,7 +38,7 @@ export default function Login() {
         {/* Coluna Direita */}
         <div className="right-section">
           <div className="form-container">
-            <h2 className="form-title">Acesse sua conta</h2>
+            <h2 className="titulo-login">Acesse sua conta</h2>
             <input
               type="email"
               id="email"

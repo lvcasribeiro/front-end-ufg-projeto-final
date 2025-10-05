@@ -27,3 +27,76 @@ input {
 h1 {
   text-shadow: 2px 3px 6px #000000;
 }
+
+/* -------------------- base de todas as pages-----------------------*/
+
+.form {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Espaço consistente entre os grupos de formulário */
+}
+
+.form-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Espaço entre o label e o input */
+}
+
+/*----------------- Estilo base dos botões ------------------*/
+
+/* Contêiner para os botões */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn:active {
+    transform: translateY(1px); /* Efeito de clique */
+}
+
+/* Botão principal (Salvar) */
+.btn-primary {
+    background-color: #650606; 
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #360505; 
+}
+
+/* Botão secundário (Cancelar) - Sólido e Suave */
+.btn-secondary {
+    background-color: #e9ecef; 
+    color: #495057; 
+    border: none; 
+}
+
+.btn-secondary:hover {
+    background-color: #360505; 
+}

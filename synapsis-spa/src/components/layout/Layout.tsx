@@ -1,18 +1,25 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import Header from "../header/Header";
 import Menu from "../menu/Menu";
 import "./Layout.css";
 
 type LayoutProps = {
-  children: ReactNode; // tipa o children corretamente
+  children: ReactNode; 
 };
 
 export default function Layout({ children }: LayoutProps ) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div className="layout">
-      <Header />
+      <Header isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+
       <div className="layout-body">
-        <Menu />
+        <Menu isMenuOpen={isMenuOpen} onClose={toggleMenu} />
         <main className="layout-content">
           {children}
         </main>
