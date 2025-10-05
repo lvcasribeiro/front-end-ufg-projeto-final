@@ -1,0 +1,27 @@
+.menu {
+  background-color: #000; /* fundo preto */
+  width: 200px;
+  height: 100vh; /* ocupa a tela toda na vertical */
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.menu-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-item {
+  color: white;
+  text-decoration: none;
+  padding: 10px 25px;
+  font-size: 16px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.menu-item:hover {
+  background-color: #1f1f1f;
+}

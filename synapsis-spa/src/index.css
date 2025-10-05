@@ -13,7 +13,10 @@ h3 {
 }
 
 p,
-body,
+body {
+  font-family: "Roboto", sans-serif;
+}
+
 i,
 input {
   font-family: "Roboto", sans-serif;

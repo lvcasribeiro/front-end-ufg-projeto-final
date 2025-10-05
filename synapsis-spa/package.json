@@ -10,13 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.90.2",
     "axios": "^1.12.2",
     "bootstrap": "^5.3.8",
     "prettier": "^3.6.2",
+    "query": "^0.2.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-hook-form": "^7.63.0",
     "react-router-dom": "^7.9.1",
     "react-spinners": "^0.17.0",
+    "react-toastify": "^11.0.5",
     "topbar": "^3.0.0",
     "vite-tsconfig-paths": "^5.1.4"
   },
