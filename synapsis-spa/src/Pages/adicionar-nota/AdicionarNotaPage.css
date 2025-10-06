@@ -31,4 +31,46 @@
     resize: vertical; /* Permite que o usuário redimensione verticalmente */
 }
 
+.color-selector {
+    display: flex;
+    gap: 16px; /* Espaço entre as bolinhas de cor */
+    align-items: center;
+    padding-top: 8px;
+}
+
+.color-option {
+    position: relative;
+    cursor: pointer;
+}
+
+/* Esconde o botão de rádio padrão */
+.color-input-radio {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+/* Estilo da bolinha de cor (swatch) */
+.color-swatch {
+    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #ced4da; /* Borda sutil para a cor branca ser visível */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efeito visual quando a cor está selecionada */
+.color-input-radio:checked + .color-swatch {
+    transform: scale(1.15); /* Aumenta um pouco a bolinha */
+    box-shadow: 0 0 0 3px #4C6EF5; /* Adiciona uma borda de foco azul */
+    border-color: #4C6EF5;
+}
+
+/* Efeito ao passar o mouse */
+.color-input-radio:not(:checked):hover + .color-swatch {
+    transform: scale(1.1);
+}
 
