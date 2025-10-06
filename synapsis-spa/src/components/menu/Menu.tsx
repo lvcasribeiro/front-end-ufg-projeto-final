@@ -2,14 +2,12 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./Menu.css";
 
-// 1. Adicionamos a tipagem para a função onClose
 type MenuProps = {
   isMenuOpen: boolean;
   onClose: () => void;
 };
 
 export default function Menu({ isMenuOpen, onClose }: MenuProps) {
-  // 2. Tipamos o objeto desestruturado ({ isActive })
   const getNavLinkClass = ({ isActive }: { isActive: boolean }) => {
     return isActive ? "menu-item active" : "menu-item";
   };
@@ -31,6 +29,9 @@ export default function Menu({ isMenuOpen, onClose }: MenuProps) {
           </NavLink>
           <NavLink to="/home/tags" className={getNavLinkClass}>
             Tags
+          </NavLink>
+          <NavLink to="/home/arquivados" className={getNavLinkClass}>
+            Arquivados
           </NavLink>
           <NavLink to="/home/usuarios" className={getNavLinkClass}>
             Usuários

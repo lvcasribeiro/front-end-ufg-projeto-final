@@ -8,26 +8,52 @@ type FetchUsersParams = {
   email?: string;
 };
 
+type Meta = {
+  totalItems: number;
+  totalPages: number;
+  currentPage: number;
+  perPage: number;
+};
+
 type FetchUsersResult = {
   data: User[];
+  meta: Meta;
 };
 
 type FetchUserParams = {
   id: number;
 };
 
+const apiClient = axios.create({
+  baseURL: "http://localhost:5005/api/v1",
+});
+
+apiClient.interceptors.request.use(
+  (config) => {
+    const tokenFromStorage = localStorage.getItem("tokenSynapsis");
+    if (tokenFromStorage) {
+      // Faz o parse para remover as aspas extras e atribui ao cabeçalho
+      const token = JSON.parse(tokenFromStorage);
+      console.log({ token });
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
+
 export async function fetchUsers({
   page,
   size,
   name,
-  email,
 }: FetchUsersParams): Promise<FetchUsersResult> {
-  const { data } = await axios.get(`http://localhost:5005/api/v1/user`, {
+  const { data } = await apiClient.get("/user", {
     params: {
       page,
       size,
       name,
-      email,
     },
   });
 
@@ -35,30 +61,32 @@ export async function fetchUsers({
 }
 
 export async function getUser({ id }: FetchUserParams): Promise<User> {
-  const { data } = await axios.get(
-    `http://localhost:5005/api/v1/user/${id}`
-  );
+  const { data } = await axios.get(`http://localhost:5005/api/v1/user/${id}`);
 
   return data;
 }
 
 export async function createUser(params: User): Promise<User> {
-    const { data } = await axios.post(
-    'http://localhost:5005/api/v1/register',
-    params );
+  const { data } = await axios.post(
+    "http://localhost:5005/api/v1/register",
+    params,
+  );
 
-    return data;
+  return data;
 }
 
 export async function updateUser(params: User): Promise<User> {
-  const { id, ...data } = params;
-  const { data: response } = await axios.put(
-    `http://localhost:5005/api/v1/user/${id}`,
-    data
-  );
-  return response;
+  const { id, ...body } = params;
+  const { data } = await apiClient.put(`/user/${id}`, body);
+  return data;
 }
 
-export async function deleteUser({ id }: { id: number }): Promise<void> {
-  await axios.delete(`http://localhost:5005/api/v1/${id}`);
+export async function deleteUser(id: number): Promise<void> {
+  await apiClient.delete(`user/${id}`);
+}
+
+export async function getUserMe(): Promise<User> {
+  const { data } = await apiClient.get("/user/me");
+
+  return data;
 }

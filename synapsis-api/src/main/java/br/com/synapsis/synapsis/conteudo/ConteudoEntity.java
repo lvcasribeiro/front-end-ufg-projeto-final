@@ -36,6 +36,9 @@ public class ConteudoEntity {
     @Column(length = 7)
     private String cor = "#3498db";
 
+    @Column(name = "is_favorito", nullable = true)
+    private Boolean isFavorito;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoria_id", nullable = true)
     private CategoriaEntity categoria;

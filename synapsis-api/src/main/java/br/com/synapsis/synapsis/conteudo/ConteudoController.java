@@ -59,6 +59,29 @@ public class ConteudoController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/arquivados")
+    public ResponseEntity<PagedResponse<ConteudoResponseDTO>> listarArquivados(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "20") int size
+    ) {
+        Long userId = authService.getAuthenticatedUserId();
+        Pageable pageable = PageRequest.of(page - 1, size);
+
+        Page<ConteudoResponseDTO> conteudoPage = service.listarTodosArquivados(pageable, userId);
+
+        PagedResponse<ConteudoResponseDTO> response = new PagedResponse<>(
+                conteudoPage.getContent(),
+                new MetaResponse(
+                        (int) conteudoPage.getTotalElements(),
+                        conteudoPage.getTotalPages(),
+                        conteudoPage.getNumber() + 1,
+                        conteudoPage.getSize()
+                )
+        );
+
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<ConteudoResponseDTO> buscar(@PathVariable Long id) {
         return ResponseEntity.ok(service.buscarPorId(id));
