@@ -10,8 +10,7 @@ export default function useBuscarFavoritos() {
   });
 
   return {
-    favoritos: data?.data,
-    meta: data?.meta,
+    favoritos: data,
     isLoadingFavoritos: isLoading,
     errorLoadingFavoritos: "Houve um erro ao carregar os dados",
     loadFavoritos: refetch,

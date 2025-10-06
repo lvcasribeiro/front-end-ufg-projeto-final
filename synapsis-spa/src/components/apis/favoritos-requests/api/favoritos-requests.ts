@@ -17,7 +17,7 @@ apiClient.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 type FetchFavoritosResult = {
@@ -30,26 +30,47 @@ type FetchFavoritoParams = {
 };
 
 type PostFavoritoParams = {
-  conteudoId: number;  
+  conteudoId: number;
+};
+
+export interface Favorito {
+  id: number;
+  criadoEm: string;
+  usuario: {
+    id: number;
+    name: string;
+    email: string;
+    apelido: string;
+    dataNascimento: string;
+  };
+  conteudo: {
+    id: number;
+    titulo: string;
+    corpo: string;
+    cor: string;
+    status: string;
+    publicadoEm: string | null;
+  };
 }
 
-export async function fetchFavoritos(): Promise<FetchFavoritosResult> {
+export async function fetchFavoritos(): Promise<Favorito[]> {
   const { data } = await apiClient.get(`/favoritos/usuario`);
-
   return data;
 }
-
-export async function getFavorito({ id }: FetchFavoritoParams): Promise<Favoritos> {
+export async function getFavorito({
+  id,
+}: FetchFavoritoParams): Promise<Favoritos> {
   const { data } = await apiClient.get(`/favoritos/${id}`);
 
   return data;
 }
 
-export async function createFavorito(params: PostFavoritoParams): Promise<Favoritos> {
-    const { data } = await apiClient.post('/favoritos',
-    params );
+export async function createFavorito(
+  params: PostFavoritoParams,
+): Promise<Favoritos> {
+  const { data } = await apiClient.post("/favoritos", params);
 
-    return data;
+  return data;
 }
 
 export async function deleteFavorito({ id }: { id: number }): Promise<void> {

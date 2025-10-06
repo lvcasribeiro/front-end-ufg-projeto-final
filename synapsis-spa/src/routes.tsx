@@ -9,11 +9,11 @@ import PerfilPage from "./Pages/perfil/PerfilPage";
 import NotasPage from "./Pages/notas/NotasPage";
 import TagsPage from "./Pages/tags/TagsPage";
 import UsuariosPage from "./Pages/usuarios/UsuariosPage";
-import Home from "./Pages/home/Home";
 import CriarUsuarioPage from "./Pages/usuarios/CriarUsuarioPage";
 import EditarUsuarioPage from "./Pages/usuarios/EditarUsuarioPage";
 import NotasArquivadas from "./Pages/notas-arquivadas/NotasArquivadas";
 import AdicionarTagPage from "./Pages/tags/AdicionarTagPage";
+import Home from "./Pages/Home/Home";
 
 export default function AppRouter() {
   return (
@@ -31,10 +31,19 @@ export default function AppRouter() {
               path="/home//minhas-notas/adicionar-nota"
               element={<AdicionarNotaPage />}
             />
-            <Route path="/home/minhas-notas/editar-nota/:id" element={<AdicionarNotaPage />} />
+            <Route
+              path="/home/minhas-notas/editar-nota/:id"
+              element={<AdicionarNotaPage />}
+            />
             <Route path="/home/tags" element={<TagsPage />} />
-            <Route path="/home/tags/adicionar-tag" element={<AdicionarTagPage />} />
-            <Route path="/home/tags/editar-tag/:id" element={<AdicionarTagPage />} />
+            <Route
+              path="/home/tags/adicionar-tag"
+              element={<AdicionarTagPage />}
+            />
+            <Route
+              path="/home/tags/editar-tag/:id"
+              element={<AdicionarTagPage />}
+            />
             <Route path="/home/usuarios" element={<UsuariosPage />} />
             <Route path="/home/usuarios" element={<UsuariosPage />} />
             <Route path="/home/usuarios/criar" element={<CriarUsuarioPage />} />
