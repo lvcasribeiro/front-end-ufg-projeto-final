@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form";
-import Logo from "../../assets/images/logo-synapsis.png";
 import "./CriarContaPage.css";
 import useSalvarUser from "./hooks/useSalvarUser";
-import type { User } from "../../components/user/types/User";
+import type { User } from "../../components/apis/user/types/User";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import BackgroundImage from "../../assets/images/background.jpg";
@@ -13,20 +12,14 @@ export default function CriarContaPage() {
   const navigate = useNavigate();
   
   const onSubmit = (data: any) => {
-    console.log("submit", data);
     
     salvarUser(data, {
       async onSuccess() {
         toast.success("Conta criada com sucesso!");
-        console.log("criado");
         navigate(`../`);
       },
-      onError() {        
-        try {
-           toast.error("Erro, não foi possível criar a conta!"); 
-        } catch (error) {
-            console.log(error);            
-        }
+      onError() {    
+        toast.error("Erro, não foi possível criar a conta!"); 
       },
     });
   };
@@ -48,7 +41,7 @@ export default function CriarContaPage() {
 
       <div className="right-section">
         <div className="form-container">
-          <h2 className="form-title">Preencha os campos</h2>
+          <h2 className="titulo-login">Preencha os campos</h2>
           <input
             type="text"
             max={255}
@@ -61,11 +54,13 @@ export default function CriarContaPage() {
           <input
             type="text"
             max={255}
+            {...methods.register("apelido",)}
             placeholder="Como você quer ser chamado?"
             className="input-field"
           />
           <input
             type="date"
+            {...methods.register("data_nascimento")}
             placeholder="Data de Nascimento"
             className="input-field"
           />

@@ -1,0 +1,131 @@
+/* Container para alinhar título e botão */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Separador visual */
+.separator {
+    border: 0;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 10px 0 20px 0;
+}
+
+/* Mensagens de estado (loading, erro, vazio) */
+.info-text {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+    width: 100%;
+    padding: 40px 0;
+}
+
+.error-text {
+    color: #d32f2f;
+}
+
+/* Grid para as notas */
+.notas-grid {
+    display: grid;
+    /* Cria um grid responsivo:
+      - Tenta criar colunas com no mínimo 250px.
+      - 'auto-fill' cria quantas colunas couberem no espaço.
+      - '1fr' faz com que elas se estiquem para ocupar o espaço por igual.
+      Isso garante no máximo 4 colunas em telas grandes e se ajusta para telas menores.
+    */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 24px; /* Espaçamento entre os cards */
+    width: 100%;
+}
+
+/* Estilo do "quadrado" de cada nota */
+.nota-card {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: 200px; /* Altura fixa para alinhar os grids */
+}
+
+.nota-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.nota-titulo {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 12px;
+    /* Trunca o título se for muito grande */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nota-corpo {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+    flex-grow: 1; /* Faz o parágrafo ocupar o espaço restante */
+    
+    /* Mágica para truncar o texto em múltiplas linhas */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* Número máximo de linhas a serem exibidas */
+    -webkit-box-orient: vertical;
+}
+
+.nota-card--dark .nota-titulo {
+    color: #f8f9fa; /* Um branco suave */
+}
+
+.nota-card--dark .nota-corpo {
+    color: #e9ecef; /* Um cinza bem claro */
+}
+
+/* Opcional: Ajusta a borda para ficar melhor em fundos escuros */
+.nota-card--dark {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.nota-actions {
+    display: flex;
+    justify-content: flex-end; /* Alinha os botões à direita */
+    gap: 12px; /* Espaço entre os botões */
+    margin-top: auto; /* Empurra para o final do card */
+    padding-top: 10px; /* Espaço para não colar no texto */
+}
+
+/* Estilo base para os botões de ícone */
+.action-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: #888; /* Cor padrão do ícone */
+    font-size: 0.9rem; /* Tamanho do ícone */
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.action-button:hover {
+    transform: scale(1.2); /* Aumenta um pouco no hover */
+}
+
+/* Cor específica para o ícone de lixeira no hover */
+.action-button:hover:has(svg[role="img"][aria-label*="trash"]) {
+    color: #e53e3e; /* Vermelho */
+}
+
+/* Cor específica para o ícone de lápis no hover */
+.action-button:hover:has(svg[role="img"][aria-label*="pencil"]) {
+    color: #3182ce; /* Azul */
+}

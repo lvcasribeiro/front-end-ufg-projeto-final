@@ -1,15 +1,22 @@
+:root {
+  --background-menu: #1a1a1a;
+  --accent-color: #8f0909;
+  --text-color: #e0e0e0;
+}
 
 .site-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 70px;
+  height: 65px;
   z-index: 1000;
   display: flex;
   align-items: center;
-  background-color: black;
-  overflow: hidden;
+
+  background: linear-gradient(90deg, #4d0404 45%, #1a1a1a 95%);
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .navbar {
@@ -17,45 +24,68 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 0 16px;
+  padding: 0 24px;
 }
 
 .navbar-left {
   display: flex;
   align-items: center;
-  gap: 8px;
-}
-
-.header-right {
-  position: relative;
-}
-
-.dropdown-btn {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
-  border: 1px solid white;
-  border-radius: 6px;
-  padding: 6px 12px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: background 0.2s;
-}
-
-.dropdown-btn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  gap: 12px;
 }
 
 .img-logo {
-  height: 32px;   /* menor que o header (50px) */
+  height: 30px;
   width: auto;
   object-fit: contain;
 }
 
 .logo-text {
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.1rem;
   cursor: pointer;
-  color: white;
+  color: #ffffff; 
+}
+
+.hamburger-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0; 
+  margin-right: 10px; 
+  z-index: 1100;
+  
+  color: white; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 769px) {
+  .hamburger-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hamburger-btn {
+    display: flex;
+  }
 }
 
 
+.dropdown-btn {
+  background-color: transparent;
+  color: var(--text-color);
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 8px 16px; 
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.dropdown-btn:hover {
+  background-color: #2a2a2a;
+  border-color: #666;
+}

@@ -13,6 +13,7 @@ public record ConteudoResponseDTO(
         String titulo,
         String corpo,
         String cor,
+        Boolean isFavorito,
         StatusConteudoEnum status,
         LocalDateTime publicadoEm,
         LocalDateTime criadoEm,

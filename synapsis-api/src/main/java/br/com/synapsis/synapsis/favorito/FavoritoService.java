@@ -46,6 +46,10 @@ public class FavoritoService {
                 .build();
 
         FavoritoEntity saved = favoritoRepository.save(favorito);
+
+        conteudo.setIsFavorito(true);
+        conteudoRepository.save(conteudo);
+
         return favoritoMapper.toResponse(saved);
     }
 
@@ -67,6 +71,15 @@ public class FavoritoService {
         if (!favoritoRepository.existsById(id)) {
             throw new NotFoundException("Favorito com ID " + id + " não encontrado.");
         }
-        favoritoRepository.deleteById(id);
+
+        FavoritoEntity favorito = favoritoRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Favorito com ID " + id + " não encontrado."));
+
+        ConteudoEntity conteudo = favorito.getConteudo();
+
+        conteudo.setIsFavorito(false);
+        conteudoRepository.save(conteudo);
+
+        favoritoRepository.delete(favorito);
     }
 }

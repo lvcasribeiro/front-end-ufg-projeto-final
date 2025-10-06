@@ -15,7 +15,7 @@ import java.io.IOException;
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class CorsFilter extends GenericFilterBean {
+public class    CorsFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

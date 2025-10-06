@@ -1,25 +1,46 @@
-// src/components/menu/Menu.jsx
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Menu.css";
 
-export default function Menu() {
+type MenuProps = {
+  isMenuOpen: boolean;
+  onClose: () => void;
+};
+
+export default function Menu({ isMenuOpen, onClose }: MenuProps) {
+  const getNavLinkClass = ({ isActive }: { isActive: boolean }) => {
+    return isActive ? "menu-item active" : "menu-item";
+  };
+
   return (
-    <aside className="menu">
-      <nav className="menu-nav">
-        <Link to="/home" className="menu-item">
-          Home  
-        </Link>
-        <Link to="/home/minhas-notas" className="menu-item">
-          Minhas Notas
-        </Link>
-        <Link to="/home/tags" className="menu-item">
-          Tags
-        </Link>
-        <Link to="/home/usuarios" className="menu-item">
-          Usuários
-        </Link>
-      </nav>
-    </aside>
+    <>
+      <div
+        className={`menu-overlay ${isMenuOpen ? "open" : ""}`}
+        onClick={onClose}
+      ></div>
+      {/* A classe 'open' é aplicada baseada na prop isMenuOpen */}
+      <aside className={`menu ${isMenuOpen ? "open" : ""}`}>
+        <nav className="menu-nav">
+          <NavLink to="/home" className={getNavLinkClass} end>
+            Home
+          </NavLink>
+          <NavLink to="/home/minhas-notas" className={getNavLinkClass}>
+            Minhas Notas
+          </NavLink>
+          <NavLink to="/home/categorias" className={getNavLinkClass}>
+            Categorias
+          </NavLink>
+          <NavLink to="/home/tags" className={getNavLinkClass}>
+            Tags
+          </NavLink>
+          <NavLink to="/home/arquivados" className={getNavLinkClass}>
+            Arquivados
+          </NavLink>
+          <NavLink to="/home/usuarios" className={getNavLinkClass}>
+            Usuários
+          </NavLink>
+        </nav>
+      </aside>
+    </>
   );
 }
