@@ -82,7 +82,7 @@ export async function updateUser(params: User): Promise<User> {
 }
 
 export async function deleteUser(id: number): Promise<void> {
-  await apiClient.delete(`user/${id}`);
+  await apiClient.delete(`/user/${id}`);
 }
 
 export async function getUserMe(): Promise<User> {

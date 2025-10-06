@@ -67,16 +67,11 @@ public class FavoritoService {
     }
 
     @Transactional
-    public void deletar(Long id) {
-        if (!favoritoRepository.existsById(id)) {
-            throw new NotFoundException("Favorito com ID " + id + " não encontrado.");
-        }
-
-        FavoritoEntity favorito = favoritoRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Favorito com ID " + id + " não encontrado."));
+    public void deletar(Long conteudoId) {
+        FavoritoEntity favorito = favoritoRepository.findByConteudoId(conteudoId)
+                .orElseThrow(() -> new NotFoundException("Favorito para o conteúdo ID " + conteudoId + " não encontrado."));
 
         ConteudoEntity conteudo = favorito.getConteudo();
-
         conteudo.setIsFavorito(false);
         conteudoRepository.save(conteudo);
 

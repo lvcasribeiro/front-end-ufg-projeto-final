@@ -28,7 +28,7 @@ export default function FavoritosPage() {
   }
 
   return (
-    <div className="container mt-4">
+    <div>
       {notasFavoritas?.length === 0 ? (
         <div className="alert alert-info">
           Você ainda não possui notas favoritas.
@@ -39,13 +39,28 @@ export default function FavoritosPage() {
             <div
               key={nota.id}
               className="nota-card"
-              // Aplica a cor de fundo, usando branco como padrão
-              style={{ backgroundColor: nota.conteudo.cor || "#FFFFFF" }}
+              style={{
+                backgroundColor: nota.conteudo.cor || "#FFFFFF",
+              }}
             >
               <h3 className="nota-titulo">{nota.conteudo.titulo}</h3>
               <p className="nota-corpo">{nota.conteudo.corpo}</p>
 
-              <div className="nota-actions">
+              <div className="nota-actions mt-3">
+                <div className="nota-tags mt-2">
+                  {nota.conteudo.tags?.length > 0 ? (
+                    nota.conteudo.tags.map((tag) => (
+                      <span
+                        key={tag.id}
+                        className="badge bg-light text-dark me-2"
+                      >
+                        #{tag.nome}
+                      </span>
+                    ))
+                  ) : (
+                    <span className="text-muted"></span>
+                  )}
+                </div>
                 <button className="action-button" title="Editar Nota">
                   <FaPencilAlt />
                 </button>

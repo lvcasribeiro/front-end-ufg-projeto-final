@@ -41,16 +41,16 @@ type FetchNotaParams = {
 export async function fetchNotas({
   page,
   size,
-  titulo, 
-  tag, 
+  titulo,
+  tag,
   status,
 }: FetchNotasParams): Promise<FetchNotasResult> {
   const { data } = await apiClient.get(`/conteudos`, {
     params: {
       page,
       size,
-      titulo, 
-      tag, 
+      titulo,
+      tag,
       status,
     },
   });
@@ -60,12 +60,10 @@ export async function fetchNotas({
 
 export async function fetchNotasArquivadas({
   page,
-  perPage,
 }: FetchNotasParams): Promise<FetchNotasResult> {
   const { data } = await apiClient.get(`/conteudos/arquivados`, {
     params: {
       page,
-      perPage,
     },
   });
   return data;

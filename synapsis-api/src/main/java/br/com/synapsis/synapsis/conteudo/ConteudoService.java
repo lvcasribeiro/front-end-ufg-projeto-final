@@ -89,10 +89,18 @@ public class ConteudoService {
             String tag,
             StatusConteudoEnum status
     ) {
-        Specification<ConteudoEntity> spec =
-                ConteudoSpecifications.buildSpecification(titulo, tag, status, userId);
+        Specification<ConteudoEntity> spec = ConteudoSpecifications.buildSpecification(titulo, tag, status, userId);
 
-        return repository.findAllNaoArquivados(spec, pageable)
+        Specification<ConteudoEntity> naoArquivado = (root, query, cb) ->
+                cb.notEqual(root.get("status"), StatusConteudoEnum.ARQUIVADO);
+
+        if (spec != null) {
+            spec = spec.and(naoArquivado);
+        } else {
+            spec = naoArquivado;
+        }
+
+        return repository.findAll(spec, pageable)
                 .map(mapper::toResponse);
     }
 
