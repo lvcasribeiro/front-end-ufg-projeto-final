@@ -1,46 +1,83 @@
-# Synapsis Project
+# 🧠 Synapsis
 
-Este repositório contém dois projetos:
+## Autores
 
-- **synapsis-api** → API desenvolvida em Java (Spring Boot).
-- **synapsis-spa** → Frontend desenvolvido em React + Vite.
+Desenvolvido por:
+
+- **Antonio Leoncio Vieira Neto - 2025200194**;
+- **Lucas Anderson Ribeiro - 2025200244**;
+- **Victor Furtado - 2025200269**.
+
+---
+
+## Este repositório contém o projeto **Synapsis**, um sistema para gerenciamento de conteúdos pessoais (notas, ideias e lembretes).
+
+## 🧩 Estrutura do Projeto
+
+```
+front-end-ufg-projeto-final/
+│── synapsis-api/   # Backend (Spring Boot + PostgreSQL)
+│── synapsis-spa/   # Frontend (React + Vite + TypeScript)
+└── README.md       # Este arquivo
+```
 
 ---
 
 ## 🚀 Backend (synapsis-api)
 
-### Pré-requisitos
+### 🔧 Tecnologias Principais
 
-- Java 25
-- Maven 3.9+
-- Docker
+- **Java 25**
+- **Spring Boot 3+**
+- **Maven 3.9+**
+- **PostgreSQL**
+- **Docker & Docker Compose**
+- **Swagger/OpenAPI** (documentação da API)
 
-### Rodando a API
+### ▶️ Execução
 
 ```bash
 cd synapsis-api
 ./mvnw spring-boot:run
 ```
 
-A API ficará disponível em:  
+A Documentação da API ficará disponível em:  
 👉 [http://localhost:5005/swagger-ui/index.html](http://localhost:5005/swagger-ui/index.html)
 
-Se quiser subir o banco local via Docker:
+### 🐘 Banco de Dados (PostgreSQL via Docker)
 
 ```bash
 docker compose up --build -d
 ```
 
+**Banco:** synapsis  
+**Usuário:** postgres  
+**Senha:** postgres  
+**Porta:** 5439
+
+### 🧭 Diagrama MER
+
+![Diagrama MER](./synapsis-spa/docs/mer.png)
+
+> O diagrama acima ilustra as entidades principais e seus relacionamentos dentro do sistema.
+
 ---
 
 ## 💻 Frontend (synapsis-spa)
 
-### Pré-requisitos
+### 🔧 Tecnologias Utilizadas
 
-- Node.js 20+
-- npm 9+
+- **React 19 + Vite 7**
+- **TypeScript**
+- **Axios**
+- **React Query (@tanstack/react-query)**
+- **Bootstrap**
+- **React Toastify**
+- **React Icons**
+- **Topbar**
+- **ESLint + Prettier**
 
-### Instalação e execução
+### ▶️ Execução
 
 ```bash
 cd synapsis-spa
@@ -48,32 +85,28 @@ npm install
 npm run dev
 ```
 
-O frontend ficará disponível em:  
+A aplicação ficará disponível em:  
 👉 [http://localhost:5173](http://localhost:5173)
 
 ---
 
-## 📂 Estrutura do Repositório
+## ✨ Funcionalidades Principais
 
-```
-front-end-ufg-projeto-final/
-│── synapsis-api/   # Backend (Spring Boot)
-│── synapsis-spa/   # Frontend (React + Vite)
-└── README.md       # Este arquivo
-```
-
----
-
-## 🛠 Tecnologias Principais
-
-- **Backend**: Java 25, Spring Boot, Maven, PostgreSQL
-- **Frontend**: React, Vite, TypeScript
-- **Infra**: Docker, Docker Compose
+✅ **CRUD de Usuário** – criar, listar, editar e excluir usuários.  
+✅ **CRUD de Conteúdo** – criar, listar, editar e excluir notas.  
+✅ **CRUD de Tags** – organizar conteúdos com categorias e etiquetas.
+✅ **Busca e Filtragem** – localizar conteúdos rapidamente.  
+✅ **Interface Amigável** – design moderno e fluido.  
+✅ **Responsividade** – experiência otimizada em desktop, tablet e mobile.
 
 ---
 
-## 📌 Observações
+## 📄 Documentação do Projeto
 
-- O backend expõe a documentação da API no Swagger: `/swagger-ui/index.html`.
-- O frontend já está configurado para rodar na porta **5173**.
-- Certifique-se de iniciar o backend antes do frontend para que a integração funcione corretamente.
+- Toda a documentação da API está disponível no **Swagger**.
+- O **README.md** inclui instruções completas para instalação e execução.
+- O código é estruturado de forma clara para facilitar manutenção e evolução.
+
+## 🏁 Licença
+
+Este projeto é de uso acadêmico e foi desenvolvido como parte da disciplina de **Desenvolvimento Front-End**, ministrada pelo **Prof. MSc. Reinaldo de Souza Júnior**.
