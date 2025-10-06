@@ -3,7 +3,7 @@ import type { User } from "../types/User";
 
 type FetchUsersParams = {
   page?: number;
-  perPage?: number;
+  size?: number;
   name?: string;
   email?: string;
 };
@@ -18,14 +18,14 @@ type FetchUserParams = {
 
 export async function fetchUsers({
   page,
-  perPage,
+  size,
   name,
   email,
 }: FetchUsersParams): Promise<FetchUsersResult> {
   const { data } = await axios.get(`http://localhost:5005/api/v1/user`, {
     params: {
       page,
-      perPage,
+      size,
       name,
       email,
     },

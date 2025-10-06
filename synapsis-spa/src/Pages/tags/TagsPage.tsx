@@ -14,7 +14,7 @@ export default function TagsPage() {
     const { salvarTags } = useSalvarTag();
     const { tags, isLoadingTags, loadTags } = useBuscarTags({
         page: 1,
-        perPage: 12,
+        size: 12,
     });
 
     const onSubmit = (data: Tags) => {
@@ -41,7 +41,7 @@ export default function TagsPage() {
                         <input 
                             type="text" 
                             className="form-input" 
-                            placeholder="Dê um nome para sua categoria..."
+                            placeholder="Dê um nome para sua tag..."
                             max={255}
                             {...methods.register("nome", {
                                 required: "Nome é obrigatório",

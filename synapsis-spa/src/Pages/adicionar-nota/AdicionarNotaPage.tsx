@@ -1,16 +1,17 @@
-import React from "react";
-import "./AdicionarNotaPage.css"; // O CSS será atualizado no próximo passo
+import React, { useEffect } from "react";
+import "./AdicionarNotaPage.css";
 import Layout from "../../components/layout/Layout";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
-import type { Notas } from "../../components/notas-api/types/notas";
+import type { Notas } from "../../components/apis/notas-requests/types/notas";
 import useSalvarNota from "./hooks/useSalvarNota";
+import useBuscarTags from "../tags/hooks/useBuscarTags";
+import useBuscarNotaById from "./hooks/useBuscarNotaById";
 
-// --- NOVO: Array com as cores disponíveis ---
 const coresDisponiveis = [
     { nome: "Branco", hex: "#FFFFFF" },
-    { nome: "Vermelho", hex: "#F47174" }, // Tons mais suaves
+    { nome: "Vermelho", hex: "#F47174" },
     { nome: "Laranja", hex: "#FFC974" },
     { nome: "Amarelo", hex: "#FFF275" },
     { nome: "Verde", hex: "#8DDB80" },
@@ -19,90 +20,91 @@ const coresDisponiveis = [
 
 export default function AdicionarNotaPage() {
     const navigate = useNavigate();
-    const methods = useForm<Notas>({
-        defaultValues: {
-            cor: "#FFFFFF" 
+    const { id } = useParams<{ id: string }>();
+    const isEditMode = !!id;
+
+    const methods = useForm<Notas>();
+    const { tags, isLoadingTags } = useBuscarTags({page: 1, size: 100, nome: ""});
+
+    const { salvarNota, isSalvandoNota } = useSalvarNota();
+    
+    const { nota, isLoadingNota } = useBuscarNotaById({ id: Number(id) });
+
+    useEffect(() => {
+        if (nota) {
+            const formData = {
+                ...nota,
+            };
+            methods.reset(formData);
         }
-    });
-    const { salvarNota } = useSalvarNota();
+    }, [nota, methods]);
 
     const onSubmit = (data: any) => {
-        console.log({data});
-        salvarNota(data, {
-          async onSuccess() {
-            toast.success("Nota criada com sucesso!");
-            navigate("/home/minhas-notas");
-          },
-          onError() {
-            console.log("erro");
-            toast.error("Erro, não foi possível criar a nota!");
-          },
+        data.status = "PUBLICADO";
+        data.tagsIds = data.tagsIds ? [data.tagsIds] : [];
+
+        const payload = isEditMode ? { ...data, id: Number(id) } : data;
+
+        salvarNota(payload, {
+            onSuccess() {
+                const message = isEditMode ? "Nota atualizada com sucesso!" : "Nota criada com sucesso!";
+                toast.success(message);
+                navigate("/home/minhas-notas");
+            },
+            onError() {
+                const message = isEditMode ? "Erro ao atualizar a nota!" : "Erro ao criar a nota!";
+                toast.error(message);
+            },
         });
-      };
+    };
+
+    if (isLoadingNota) {
+        return <Layout><p>Carregando nota...</p></Layout>;
+    }
 
     return (
         <Layout>
             <form className="form" onSubmit={methods.handleSubmit(onSubmit)}>
-                <h2 className="form-title">Adicionar Nota</h2>
+                <h2 className="form-title">{isEditMode ? "Editar Nota" : "Adicionar Nota"}</h2>
 
-                {/* Campo Título */}
+                {/* Seus campos de formulário continuam iguais */}
                 <div className="form-group">
                     <label htmlFor="titulo" className="form-label">Título</label>
-                    <input
-                        type="text"
-                        className="form-input"
-                        placeholder="Dê um título para sua nota..."
-                        maxLength={255}
-                        {...methods.register("titulo", {
-                            required: "Título é obrigatório",
-                        })}
-                    />
+                    <input type="text" className="form-input" {...methods.register("titulo", { required: true })} />
                 </div>
-
-                {/* Campo Conteúdo */}
                 <div className="form-group">
                     <label htmlFor="conteudo" className="form-label">Conteúdo</label>
-                    <textarea
-                        className="form-input form-textarea"
-                        placeholder="Escreva sua nota aqui..."
-                        {...methods.register("corpo", {
-                            required: "Conteúdo é obrigatório",
-                        })}
-                    />
+                    <textarea className="form-input form-textarea" {...methods.register("corpo", { required: true })} />
                 </div>
-
-                {/* --- NOVO: Seletor de Cores Visual --- */}
-                <div className="form-group">
-                    <label className="form-label">Cor</label>
-                    <div className="color-selector">
-                        {coresDisponiveis.map((cor) => (
-                            <label key={cor.hex} className="color-option">
-                                <input
-                                    type="radio"
-                                    value={cor.hex}
-                                    className="color-input-radio"
-                                    {...methods.register("cor")}
-                                />
-                                <span
-                                    className="color-swatch"
-                                    style={{ backgroundColor: cor.hex }}
-                                    title={cor.nome}
-                                />
-                            </label>
-                        ))}
+                <div className="form-row">
+                    <div className="form-group">
+                        <label className="form-label">Cor</label>
+                        <div className="color-selector">
+                            {coresDisponiveis.map((cor) => (
+                                <label key={cor.hex} className="color-option">
+                                    <input type="radio" value={cor.hex} className="color-input-radio" {...methods.register("cor")} />
+                                    <span className="color-swatch" style={{ backgroundColor: cor.hex }} title={cor.nome} />
+                                </label>
+                            ))}
+                        </div>
                     </div>
-                </div>
+                    <div className="form-group form-group--tag">
+                        <label className="form-label">Tag</label>
+                        <select className="form-input" disabled={isLoadingTags} {...methods.register("tagsIds")}>
+                            <option value="">Nenhuma tag</option>
+                            {tags?.map(tag => (
+                                <option key={tag.id} value={tag.id}>{tag.nome}</option>
+                            ))}
+                        </select>
+                    </div>
+                </div>         
 
-                {/* Botões de Ação */}
                 <div className="form-actions">
-                    <button
-                        type="button"
-                        className="btn btn-secondary"
-                        onClick={() => navigate("/home/minhas-notas")}
-                    >
-                        Cancelar
+                    <button type="button" className="btn btn-secondary" onClick={() => navigate("/home/minhas-notas")}>Cancelar</button>
+             
+                    <button type="submit" className="btn btn-primary" disabled={isSalvandoNota}>
+                        {isSalvandoNota ? "Salvando..." : "Salvar"}
                     </button>
-                    <button type="submit" className="btn btn-primary">Salvar</button>
                 </div>
             </form>
         </Layout>

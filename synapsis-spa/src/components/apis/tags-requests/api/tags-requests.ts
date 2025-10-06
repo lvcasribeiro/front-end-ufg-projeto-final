@@ -22,9 +22,8 @@ apiClient.interceptors.request.use(
 
 type FetchTagsParams = {
   page?: number;
-  perPage?: number;
-  name?: string;
-  email?: string;
+  size?: number;
+  nome?: string;
 };
 
 type FetchTagsResult = {
@@ -38,16 +37,14 @@ type FetchTagParams = {
 
 export async function fetchTags({
   page,
-  perPage,
-  name,
-  email,
+  size,
+  nome,
 }: FetchTagsParams): Promise<FetchTagsResult> {
-  const { data } = await axios.get(`http://localhost:5005/api/v1/tags`, {
+  const { data } = await apiClient.get(`/tags`, {
     params: {
       page,
-      perPage,
-      name,
-      email,
+      size,
+      nome,
     },
   });
 
@@ -55,16 +52,13 @@ export async function fetchTags({
 }
 
 export async function getTag({ id }: FetchTagParams): Promise<Tags> {
-  const { data } = await axios.get(
-    `http://localhost:5005/api/v1/tags/${id}`
-  );
+  const { data } = await apiClient.get(`/tags/${id}`);
 
   return data;
 }
 
 export async function createTag(params: Tags): Promise<Tags> {
-    const { data } = await axios.post(
-    'http://localhost:5005/api/v1/tags',
+    const { data } = await apiClient.post('/tags',
     params );
 
     return data;
@@ -72,13 +66,12 @@ export async function createTag(params: Tags): Promise<Tags> {
 
 export async function updateTag(params: Tags): Promise<Tags> {
   const { id, ...data } = params;
-  const { data: response } = await axios.put(
-    `http://localhost:5005/api/v1/tags/${id}`,
+  const { data: response } = await apiClient.put(`/tags/${id}`,
     data
   );
   return response;
 }
 
 export async function deleteTag({ id }: { id: number }): Promise<void> {
-  await axios.delete(`http://localhost:5005/api/v1/tags/${id}`);
+  await apiClient.delete(`/tags/${id}`);
 }

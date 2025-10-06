@@ -1,4 +1,3 @@
-/* Container para alinhar título e botão */
 .header-container {
     display: flex;
     justify-content: space-between;
@@ -6,7 +5,6 @@
     width: 100%;
 }
 
-/* Separador visual */
 .separator {
     border: 0;
     height: 1px;
@@ -14,7 +12,6 @@
     margin: 10px 0 20px 0;
 }
 
-/* Mensagens de estado (loading, erro, vazio) */
 .info-text {
     text-align: center;
     font-size: 1.1rem;
@@ -30,18 +27,11 @@
 /* Grid para as notas */
 .notas-grid {
     display: grid;
-    /* Cria um grid responsivo:
-      - Tenta criar colunas com no mínimo 250px.
-      - 'auto-fill' cria quantas colunas couberem no espaço.
-      - '1fr' faz com que elas se estiquem para ocupar o espaço por igual.
-      Isso garante no máximo 4 colunas em telas grandes e se ajusta para telas menores.
-    */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 24px; /* Espaçamento entre os cards */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
     width: 100%;
 }
 
-/* Estilo do "quadrado" de cada nota */
 .nota-card {
     background-color: #fff;
     border: 1px solid #eee;
@@ -74,58 +64,120 @@
     font-size: 1rem;
     color: #555;
     line-height: 1.5;
-    flex-grow: 1; /* Faz o parágrafo ocupar o espaço restante */
+    flex-grow: 1;
     
-    /* Mágica para truncar o texto em múltiplas linhas */
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 4; /* Número máximo de linhas a serem exibidas */
+    -webkit-line-clamp: 4; 
     -webkit-box-orient: vertical;
 }
 
 .nota-card--dark .nota-titulo {
-    color: #f8f9fa; /* Um branco suave */
+    color: #f8f9fa; 
 }
 
 .nota-card--dark .nota-corpo {
-    color: #e9ecef; /* Um cinza bem claro */
+    color: #e9ecef; 
 }
 
-/* Opcional: Ajusta a borda para ficar melhor em fundos escuros */
 .nota-card--dark {
     border-color: rgba(255, 255, 255, 0.2);
 }
 
 .nota-actions {
     display: flex;
-    justify-content: flex-end; /* Alinha os botões à direita */
-    gap: 12px; /* Espaço entre os botões */
-    margin-top: auto; /* Empurra para o final do card */
-    padding-top: 10px; /* Espaço para não colar no texto */
+    justify-content: flex-end;
+    gap: 12px; 
+    margin-top: auto; 
+    padding-top: 10px;
 }
 
-/* Estilo base para os botões de ícone */
 .action-button {
     background: none;
     border: none;
     cursor: pointer;
     padding: 5px;
-    color: #888; /* Cor padrão do ícone */
-    font-size: 0.9rem; /* Tamanho do ícone */
+    color: #888; 
+    font-size: 0.9rem;
     transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .action-button:hover {
-    transform: scale(1.2); /* Aumenta um pouco no hover */
+    transform: scale(1.2); 
 }
 
-/* Cor específica para o ícone de lixeira no hover */
 .action-button:hover:has(svg[role="img"][aria-label*="trash"]) {
-    color: #e53e3e; /* Vermelho */
+    color: #e53e3e; 
 }
 
-/* Cor específica para o ícone de lápis no hover */
 .action-button:hover:has(svg[role="img"][aria-label*="pencil"]) {
-    color: #3182ce; /* Azul */
+    color: #3182ce;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px; 
+}
+
+.filter-select {
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #495057;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    height: 40px; 
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: #4C6EF5; 
+    box-shadow: 0 0 0 3px rgba(76, 110, 245, 0.2);
+}
+
+.filter-select:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+
+    .header-container {
+        flex-direction: column; 
+        align-items: flex-start;  
+        gap: 20px;                
+    }
+
+    /* Faz a seção de ações (filtro e botão) ocupar a largura total */
+    .header-actions {
+        width: 100%;
+    }
+
+    /* Faz o select crescer para ocupar o espaço disponível ao lado do botão */
+    .filter-select {
+        flex-grow: 1; /* Permite que o select se estique e ocupe o espaço vazio */
+    }
+}
+
+.nota-card {
+    /* ... outras propriedades como background-color, border, etc. */
+    position: relative; /* Essencial para o posicionamento do botão */
+}
+
+/* Novo estilo para o botão de favoritar */
+.favorite-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.2rem; /* Deixa o coração um pouco maior */
+    padding: 8px;
+}
+
+/* Garante que o ícone preenchido (FcLike) também seja grande */
+.favorite-button svg {
+    font-size: 1.2rem;
 }

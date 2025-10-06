@@ -10,8 +10,6 @@ import PerfilPage from "./Pages/perfil/PerfilPage";
 import NotasPage from "./Pages/notas/NotasPage";
 import TagsPage from "./Pages/tags/TagsPage";
 import UsuariosPage from "./Pages/usuarios/UsuariosPage";
-import CategoriasPage from "./Pages/categorias/CategoriasPage";
-import AdicionarCategoriaPage from "./Pages/adicionar-categoria/AdicionarCategoriaPage";
 
 
 export default function AppRouter() {
@@ -26,9 +24,8 @@ export default function AppRouter() {
               <Route index element={<Home />} />
               <Route path="/home/perfil" element={<PerfilPage />} />
               <Route path="/home/minhas-notas" element={<NotasPage />} />
-              <Route path="/home//minhas-notas/adicionar-nota" element={<AdicionarNotaPage />} />
-              <Route path="/home/categorias" element={<CategoriasPage />} />
-              <Route path="/home/categorias/adicionar-categoria" element={<AdicionarCategoriaPage />} />
+              <Route path="/home/minhas-notas/adicionar-nota" element={<AdicionarNotaPage />} />
+              <Route path="/home/minhas-notas/editar-nota/:id" element={<AdicionarNotaPage />} />
               <Route path="/home/tags" element={<TagsPage />} />
               <Route path="/home/usuarios" element={<UsuariosPage />} />
             </Route>

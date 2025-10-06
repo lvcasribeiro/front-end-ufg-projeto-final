@@ -3,16 +3,18 @@ import { fetchTags } from "../../../components/apis/tags-requests/api/tags-reque
 
 type Params = {
   page?: number;
-  perPage?: number;
+  size?: number;
+  nome?: string;
 };
 
-export default function useBuscarTags({ page, perPage}: Params) {
+export default function useBuscarTags({ page, size, nome }: Params) {
   const { data, refetch, isLoading, error } = useQuery({
-    queryKey: ["tags", page, perPage],
+    queryKey: ["tags", page, size, nome],
     queryFn() {
       return fetchTags({
         page,
-        perPage,
+        size,
+        nome,
       });
     },
   });
