@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import styles from "./PrivateRoute.module.css";
 import { useAuth } from "../AuthContext/AuthContext";
-import Login from "../../../Pages/Login/Login";
+import Login from "../../../Pages/login/Login";
 
 export default function PrivateRoute() {
   const { isAuthenticated, isLoading } = useAuth();
