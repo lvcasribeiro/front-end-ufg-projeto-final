@@ -4,6 +4,7 @@ import br.com.synapsis.synapsis.categoria.CategoriaEntity;
 import br.com.synapsis.synapsis.categoria.CategoriaRepository;
 import br.com.synapsis.synapsis.conteudo.dto.ConteudoRequestDTO;
 import br.com.synapsis.synapsis.conteudo.dto.ConteudoResponseDTO;
+import br.com.synapsis.synapsis.shared.enums.StatusConteudoEnum;
 import br.com.synapsis.synapsis.shared.exceptions.NotFoundException;
 import br.com.synapsis.synapsis.tag.TagEntity;
 import br.com.synapsis.synapsis.tag.TagRepository;
@@ -14,6 +15,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
@@ -80,8 +82,17 @@ public class ConteudoService {
     }
 
 
-    public Page<ConteudoResponseDTO> listarTodos(Pageable pageable,Long userId) {
-        return repository.findByUsuarioId(userId, pageable)
+    public Page<ConteudoResponseDTO> listarTodos(
+            Pageable pageable,
+            Long userId,
+            String titulo,
+            String tag,
+            StatusConteudoEnum status
+    ) {
+        Specification<ConteudoEntity> spec =
+                ConteudoSpecifications.buildSpecification(titulo, tag, status, userId);
+
+        return repository.findAll(spec, pageable)
                 .map(mapper::toResponse);
     }
 

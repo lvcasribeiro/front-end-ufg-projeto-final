@@ -36,12 +36,14 @@ public class TagController {
 
     @GetMapping
     public ResponseEntity<PagedResponse<TagResponseDTO>> listar(
+            @RequestParam(required = false) String nome,
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "20") int size
     ) {
         Long userId = authService.getAuthenticatedUserId();
         Pageable pageable = PageRequest.of(page - 1, size);
-        Page<TagResponseDTO> tagPage = tagService.listarTodos(pageable, userId);
+
+        Page<TagResponseDTO> tagPage = tagService.listarTodos(pageable, userId, nome);
 
         PagedResponse<TagResponseDTO> response = new PagedResponse<>(
                 tagPage.getContent(),
@@ -55,6 +57,7 @@ public class TagController {
 
         return ResponseEntity.ok(response);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<TagResponseDTO> atualizar(
