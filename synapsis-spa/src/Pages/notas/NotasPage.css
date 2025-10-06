@@ -66,7 +66,6 @@
     color: #333;
     margin-bottom: 12px;
     /* Trunca o título se for muito grande */
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -83,4 +82,50 @@
     display: -webkit-box;
     -webkit-line-clamp: 4; /* Número máximo de linhas a serem exibidas */
     -webkit-box-orient: vertical;
+}
+
+.nota-card--dark .nota-titulo {
+    color: #f8f9fa; /* Um branco suave */
+}
+
+.nota-card--dark .nota-corpo {
+    color: #e9ecef; /* Um cinza bem claro */
+}
+
+/* Opcional: Ajusta a borda para ficar melhor em fundos escuros */
+.nota-card--dark {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.nota-actions {
+    display: flex;
+    justify-content: flex-end; /* Alinha os botões à direita */
+    gap: 12px; /* Espaço entre os botões */
+    margin-top: auto; /* Empurra para o final do card */
+    padding-top: 10px; /* Espaço para não colar no texto */
+}
+
+/* Estilo base para os botões de ícone */
+.action-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: #888; /* Cor padrão do ícone */
+    font-size: 0.9rem; /* Tamanho do ícone */
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.action-button:hover {
+    transform: scale(1.2); /* Aumenta um pouco no hover */
+}
+
+/* Cor específica para o ícone de lixeira no hover */
+.action-button:hover:has(svg[role="img"][aria-label*="trash"]) {
+    color: #e53e3e; /* Vermelho */
+}
+
+/* Cor específica para o ícone de lápis no hover */
+.action-button:hover:has(svg[role="img"][aria-label*="pencil"]) {
+    color: #3182ce; /* Azul */
 }
