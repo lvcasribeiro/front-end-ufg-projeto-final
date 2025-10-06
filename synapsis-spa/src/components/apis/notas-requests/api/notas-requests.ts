@@ -23,7 +23,10 @@ apiClient.interceptors.request.use(
 
 type FetchNotasParams = {
   page?: number;
-  perPage?: number;
+  size?: number;
+  titulo?: string;
+  tag?: string;
+  status?: string;
 };
 
 type FetchNotasResult = {
@@ -37,12 +40,18 @@ type FetchNotaParams = {
 
 export async function fetchNotas({
   page,
-  perPage,
+  size,
+  titulo, 
+  tag, 
+  status,
 }: FetchNotasParams): Promise<FetchNotasResult> {
   const { data } = await apiClient.get(`/conteudos`, {
     params: {
       page,
-      perPage,
+      size,
+      titulo, 
+      tag, 
+      status,
     },
   });
 

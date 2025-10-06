@@ -3,7 +3,7 @@ import type { User } from "../types/User";
 
 type FetchUsersParams = {
   page?: number;
-  perPage?: number;
+  size?: number;
   name?: string;
   email?: string;
 };
@@ -46,13 +46,13 @@ apiClient.interceptors.request.use(
 
 export async function fetchUsers({
   page,
-  perPage,
+  size,
   name,
 }: FetchUsersParams): Promise<FetchUsersResult> {
   const { data } = await apiClient.get("/user", {
     params: {
       page,
-      perPage,
+      size,
       name,
     },
   });

@@ -3,16 +3,22 @@ import { fetchNotas } from "../../../components/apis/notas-requests/api/notas-re
 
 type Params = {
   page?: number;
-  perPage?: number;
+  size?: number;
+  titulo?: string;
+  tag?: string;
+  status?: string;
 };
 
-export default function useBuscarNotas({ page, perPage}: Params) {
+export default function useBuscarNotas({ page, size, titulo, tag, status }: Params) {
   const { data, refetch, isLoading, error } = useQuery({
-    queryKey: ["conteudo", page, perPage],
+    queryKey: ["notas", page, size, titulo, tag, status],
     queryFn() {
       return fetchNotas({
         page,
-        perPage,
+        size,
+        titulo, 
+        tag, 
+        status,
       });
     },
   });

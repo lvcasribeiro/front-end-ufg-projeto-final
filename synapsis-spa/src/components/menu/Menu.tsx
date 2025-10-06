@@ -27,9 +27,6 @@ export default function Menu({ isMenuOpen, onClose }: MenuProps) {
           <NavLink to="/home/minhas-notas" className={getNavLinkClass}>
             Minhas Notas
           </NavLink>
-          <NavLink to="/home/categorias" className={getNavLinkClass}>
-            Categorias
-          </NavLink>
           <NavLink to="/home/tags" className={getNavLinkClass}>
             Tags
           </NavLink>
