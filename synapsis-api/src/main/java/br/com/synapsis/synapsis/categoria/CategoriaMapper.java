@@ -32,6 +32,7 @@ public interface CategoriaMapper {
                         c.getTitulo(),
                         c.getCorpo(),
                         c.getCor(),
+                        c.getIsFavorito(),
                         c.getStatus(),
                         c.getPublicadoEm(),
                         c.getCriadoEm(),

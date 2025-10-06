@@ -14,6 +14,7 @@ import AdicionarCategoriaPage from "./Pages/adicionar-categoria/AdicionarCategor
 import Home from "./Pages/Home/Home";
 import CriarUsuarioPage from "./Pages/usuarios/CriarUsuarioPage";
 import EditarUsuarioPage from "./Pages/usuarios/EditarUsuarioPage";
+import NotasArquivadas from "./Pages/notas-arquivadas/NotasArquivadas";
 
 export default function AppRouter() {
   return (
@@ -27,6 +28,7 @@ export default function AppRouter() {
             <Route index element={<Home />} />
             <Route path="/home/perfil" element={<PerfilPage />} />
             <Route path="/home/minhas-notas" element={<NotasPage />} />
+            <Route path="/home/arquivados" element={<NotasArquivadas />} />
             <Route
               path="/home//minhas-notas/adicionar-nota"
               element={<AdicionarNotaPage />}

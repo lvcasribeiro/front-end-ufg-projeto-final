@@ -3,8 +3,10 @@ package br.com.synapsis.synapsis.conteudo;
 import br.com.synapsis.synapsis.shared.enums.StatusConteudoEnum;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,4 +20,9 @@ public interface ConteudoRepository extends JpaRepository<ConteudoEntity, Long>,
     Optional<ConteudoEntity> findByIdAndUsuarioId(Long id, Long userId);
 
     Page<ConteudoEntity> findByUsuarioId(Long usuarioId, Pageable pageable);
+
+    @Query("SELECT c FROM ConteudoEntity c WHERE c.status <> 'ARQUIVADO'")
+    Page<ConteudoEntity> findAllNaoArquivados(Specification<ConteudoEntity> spec, Pageable pageable);
+
+    Page<ConteudoEntity> findByUsuarioIdAndStatus(Long usuarioId, StatusConteudoEnum status, Pageable pageable);
 }

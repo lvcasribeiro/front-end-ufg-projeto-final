@@ -65,21 +65,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     topbar.hide();
   };
 
-  useEffect(() => {
-    const interceptor = axios.interceptors.response.use(
-      (response) => response,
-      (error) => {
-        if (error.response?.status === 401) {
-          logout(); // Logout automático em Unauthorized
-        }
-        return Promise.reject(error);
-      },
-    );
+  // useEffect(() => {
+  //   const interceptor = axios.interceptors.response.use(
+  //     (response) => response,
+  //     (error) => {
+  //       if (error.response?.status === 401) {
+  //         logout(); // Logout automático em Unauthorized
+  //       }
+  //       return Promise.reject(error);
+  //     },
+  //   );
 
-    return () => {
-      axios.interceptors.response.eject(interceptor);
-    };
-  }, []);
+  //   return () => {
+  //     axios.interceptors.response.eject(interceptor);
+  //   };
+  // }, []);
 
   return (
     <AuthContext.Provider

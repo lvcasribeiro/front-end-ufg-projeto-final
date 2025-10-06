@@ -92,7 +92,15 @@ public class ConteudoService {
         Specification<ConteudoEntity> spec =
                 ConteudoSpecifications.buildSpecification(titulo, tag, status, userId);
 
-        return repository.findAll(spec, pageable)
+        return repository.findAllNaoArquivados(spec, pageable)
+                .map(mapper::toResponse);
+    }
+
+    public Page<ConteudoResponseDTO> listarTodosArquivados(
+            Pageable pageable,
+            Long userId
+    ) {
+        return repository.findByUsuarioIdAndStatus(userId, StatusConteudoEnum.ARQUIVADO, pageable)
                 .map(mapper::toResponse);
     }
 

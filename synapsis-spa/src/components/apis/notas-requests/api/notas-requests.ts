@@ -11,14 +11,14 @@ apiClient.interceptors.request.use(
     if (tokenFromStorage) {
       // Faz o parse para remover as aspas extras e atribui ao cabeçalho
       const token = JSON.parse(tokenFromStorage);
-      console.log({token});
+      console.log({ token });
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 type FetchNotasParams = {
@@ -49,25 +49,34 @@ export async function fetchNotas({
   return data;
 }
 
+export async function fetchNotasArquivadas({
+  page,
+  perPage,
+}: FetchNotasParams): Promise<FetchNotasResult> {
+  const { data } = await apiClient.get(`/conteudos/arquivados`, {
+    params: {
+      page,
+      perPage,
+    },
+  });
+  return data;
+}
+
 export async function getNota({ id }: FetchNotaParams): Promise<Notas> {
-  const { data } = await apiClient.get(`/conteudos/${id}`
-  );
+  const { data } = await apiClient.get(`/conteudos/${id}`);
 
   return data;
 }
 
 export async function createNota(params: Notas): Promise<Notas> {
-    const { data } = await apiClient.post('/conteudos',
-    params );
+  const { data } = await apiClient.post("/conteudos", params);
 
-    return data;
+  return data;
 }
 
 export async function updateNota(params: Notas): Promise<Notas> {
   const { id, ...data } = params;
-  const { data: response } = await apiClient.put(`/conteudos/${id}`,
-    data
-  );
+  const { data: response } = await apiClient.put(`/conteudos/${id}`, data);
   return response;
 }
 
