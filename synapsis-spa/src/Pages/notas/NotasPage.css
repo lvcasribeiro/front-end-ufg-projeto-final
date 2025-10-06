@@ -1,0 +1,86 @@
+/* Container para alinhar título e botão */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Separador visual */
+.separator {
+    border: 0;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 10px 0 20px 0;
+}
+
+/* Mensagens de estado (loading, erro, vazio) */
+.info-text {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+    width: 100%;
+    padding: 40px 0;
+}
+
+.error-text {
+    color: #d32f2f;
+}
+
+/* Grid para as notas */
+.notas-grid {
+    display: grid;
+    /* Cria um grid responsivo:
+      - Tenta criar colunas com no mínimo 250px.
+      - 'auto-fill' cria quantas colunas couberem no espaço.
+      - '1fr' faz com que elas se estiquem para ocupar o espaço por igual.
+      Isso garante no máximo 4 colunas em telas grandes e se ajusta para telas menores.
+    */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 24px; /* Espaçamento entre os cards */
+    width: 100%;
+}
+
+/* Estilo do "quadrado" de cada nota */
+.nota-card {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: 200px; /* Altura fixa para alinhar os grids */
+}
+
+.nota-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.nota-titulo {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 12px;
+    /* Trunca o título se for muito grande */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nota-corpo {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+    flex-grow: 1; /* Faz o parágrafo ocupar o espaço restante */
+    
+    /* Mágica para truncar o texto em múltiplas linhas */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* Número máximo de linhas a serem exibidas */
+    -webkit-box-orient: vertical;
+}

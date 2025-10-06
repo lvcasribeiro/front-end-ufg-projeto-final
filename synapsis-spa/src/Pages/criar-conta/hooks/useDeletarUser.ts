@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { deleteUser } from "../../../components/user/api/user-requests";
+import { deleteUser } from "../../../components/apis/user/api/user-requests";
 
 export default function useDeletarUser() {
   const { mutate, error, isPending } = useMutation({

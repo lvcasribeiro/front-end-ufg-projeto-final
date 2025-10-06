@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../../components/config/queryClient";
-import type { User } from "../../../components/user/types/User";
-import { createUser, updateUser } from "../../../components/user/api/user-requests";
+import type { User } from "../../../components/apis/user/types/User";
+import { createUser, updateUser } from "../../../components/apis/user/api/user-requests";
 
 export default function useSalvarUser() {
   const { mutate, isPending } = useMutation({
