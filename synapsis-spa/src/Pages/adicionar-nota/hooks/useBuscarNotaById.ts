@@ -15,7 +15,7 @@ export default function useBuscarNotaById({ id }: Params) {
   });
 
   return {
-    errorFetchingStatusAndamentoProcesso: "Houve um erro ao carregar os dados",
+    errorFetchingNota: "Houve um erro ao carregar os dados",
     isLoadingNota: isLoading,
     loadNota: refetch,
     nota: data,

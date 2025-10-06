@@ -13,6 +13,7 @@ import Home from "./Pages/home/Home";
 import CriarUsuarioPage from "./Pages/usuarios/CriarUsuarioPage";
 import EditarUsuarioPage from "./Pages/usuarios/EditarUsuarioPage";
 import NotasArquivadas from "./Pages/notas-arquivadas/NotasArquivadas";
+import AdicionarTagPage from "./Pages/tags/AdicionarTagPage";
 
 export default function AppRouter() {
   return (
@@ -32,6 +33,8 @@ export default function AppRouter() {
             />
             <Route path="/home/minhas-notas/editar-nota/:id" element={<AdicionarNotaPage />} />
             <Route path="/home/tags" element={<TagsPage />} />
+            <Route path="/home/tags/adicionar-tag" element={<AdicionarTagPage />} />
+            <Route path="/home/tags/editar-tag/:id" element={<AdicionarTagPage />} />
             <Route path="/home/usuarios" element={<UsuariosPage />} />
             <Route path="/home/usuarios" element={<UsuariosPage />} />
             <Route path="/home/usuarios/criar" element={<CriarUsuarioPage />} />
