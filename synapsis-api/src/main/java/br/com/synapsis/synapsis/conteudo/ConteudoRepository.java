@@ -21,8 +21,5 @@ public interface ConteudoRepository extends JpaRepository<ConteudoEntity, Long>,
 
     Page<ConteudoEntity> findByUsuarioId(Long usuarioId, Pageable pageable);
 
-    @Query("SELECT c FROM ConteudoEntity c WHERE c.status <> 'ARQUIVADO'")
-    Page<ConteudoEntity> findAllNaoArquivados(Specification<ConteudoEntity> spec, Pageable pageable);
-
     Page<ConteudoEntity> findByUsuarioIdAndStatus(Long usuarioId, StatusConteudoEnum status, Pageable pageable);
 }
