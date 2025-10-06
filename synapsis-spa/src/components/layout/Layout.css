@@ -7,18 +7,19 @@
 .layout-body {
   display: flex;
   flex: 1;
-  margin-top: 70px; /* se o header for fixo com 50px */
+  margin-top: 60px; /* se o header for fixo com 50px */
 }
 
-.layout-content { /* Assumindo que esta é a classe do seu <main> no Layout.tsx */
-    width: 100%;
-    min-height: 100vh; /* Ocupa a altura toda */
-    padding: 40px 20px;
-    background-color: #f5f3f0;
-    
-    /* Adicionamos flex para centralizar o .form que está dentro dele */
-    display: flex;
-    flex-direction: column; /* Alinha o form no eixo vertical */
-    align-items: center; /* Centraliza o form horizontalmente */
-    justify-content: flex-start; /* Alinha o form no topo */
+.layout-content {
+  /* Assumindo que esta é a classe do seu <main> no Layout.tsx */
+  width: 100%;
+  min-height: 100vh; /* Ocupa a altura toda */
+  padding: 40px 20px;
+  background-color: #f5f3f0;
+
+  /* Adicionamos flex para centralizar o .form que está dentro dele */
+  display: flex;
+  flex-direction: column; /* Alinha o form no eixo vertical */
+  align-items: center; /* Centraliza o form horizontalmente */
+  justify-content: flex-start; /* Alinha o form no topo */
 }

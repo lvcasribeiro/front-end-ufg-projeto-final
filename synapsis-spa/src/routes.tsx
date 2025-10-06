@@ -3,7 +3,7 @@ import CriarContaPage from "./Pages/criar-conta/CriarContaPage";
 
 import { AuthProvider } from "./_components/Auth/AuthContext/AuthContext";
 import PrivateRoute from "./_components/Auth/PrivateRoute/PrivateRoute";
-import Login from "./Pages/Login/Login";
+import Login from "./Pages/login/Login";
 import AdicionarNotaPage from "./Pages/adicionar-nota/AdicionarNotaPage";
 import PerfilPage from "./Pages/perfil/PerfilPage";
 import NotasPage from "./Pages/notas/NotasPage";

@@ -4,6 +4,7 @@ import { useAuth } from "../../_components/Auth/AuthContext/AuthContext";
 import "./LoginPage.css";
 import { Link } from "react-router-dom";
 import BackgroundImage from "../../assets/images/background.jpg";
+import Logo from "../../assets/images/logo-synapsis.png";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -28,14 +29,16 @@ export default function Login() {
           aria-hidden="true"
         />
 
-        {/* Coluna Esquerda */}
         <div className="left-section">
           <div className="hero-container">
+            <div className="brand-inline">
+              <img src={Logo} alt="Synapsis Logo" className="brand-logo" />
+              <span className="brand-name">SYNAPSIS</span>
+            </div>
             <h1 className="hero-text">Conecte Ideias</h1>
           </div>
         </div>
 
-        {/* Coluna Direita */}
         <div className="right-section">
           <div className="form-container">
             <h2 className="titulo-login">Acesse sua conta</h2>
@@ -58,11 +61,15 @@ export default function Login() {
               required
             />
 
-            <button type="submit" className="login-button">Entrar</button>
-            <Link to={"./criar-conta"} className="criar-conta">Não tem conta? crie agora!</Link>
+            <button type="submit" className="login-button">
+              Entrar
+            </button>
+            <Link to={"./criar-conta"} className="criar-conta">
+              Não tem conta? crie agora!
+            </Link>
           </div>
         </div>
-    </div>
-  </form>
+      </div>
+    </form>
   );
 }

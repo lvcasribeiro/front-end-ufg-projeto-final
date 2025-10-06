@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap");
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
 }
 
 /* Container principal dividido em 2 colunas com gradiente */
@@ -27,7 +28,6 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px; /* espaço entre imagem e texto */
 }
 
 .image-center {
@@ -78,7 +78,7 @@ html, body {
   padding: 7px;
   border: none;
   border-radius: 8px;
-  background-color: #191758; 
+  background-color: #191758;
   color: white;
   font-size: 18px;
   cursor: pointer;
