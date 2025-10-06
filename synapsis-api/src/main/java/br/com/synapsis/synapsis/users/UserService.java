@@ -51,12 +51,17 @@ public class UserService {
         UserEntity entity = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Usuario não encontrado para o ID:" + id));
 
-        boolean exists = userRepository.existsByEmail(userInputDTO.email());
+        boolean exists = userRepository.existsByEmailAndIdNot(userInputDTO.email(), id);
         if (exists) {
             throw new ConflictException("Já existe um usuario com este email");
         }
 
+        if (userInputDTO.password() != null && !userInputDTO.password().isEmpty()) {
+            entity.setPassword(passwordEncoder.encode(userInputDTO.password()));
+        }
+
         userMapper.updateEntityFromDto(userInputDTO, entity);
+
         return userRepository.save(entity);
     }
 

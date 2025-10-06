@@ -1,11 +1,5 @@
-import type {
-  ReactNode} from "react";
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-} from "react";
+import type { ReactNode } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import topbar from "topbar";
 
@@ -31,7 +25,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (token) {
       setIsAuthenticated(true);
     }
-    setIsLoading(false); 
+    setIsLoading(false);
   }, []);
 
   const login = async (email: string, senha: string) => {
@@ -63,8 +57,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const logout = () => {
+    topbar.show(); // UX consistente
     localStorage.removeItem("tokenSynapsis");
     setIsAuthenticated(false);
+    setErrorMessage("");
+    setIsLoading(false);
+    topbar.hide();
   };
 
   useEffect(() => {
@@ -72,7 +70,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       (response) => response,
       (error) => {
         if (error.response?.status === 401) {
-          logout();
+          logout(); // Logout automático em Unauthorized
         }
         return Promise.reject(error);
       },
