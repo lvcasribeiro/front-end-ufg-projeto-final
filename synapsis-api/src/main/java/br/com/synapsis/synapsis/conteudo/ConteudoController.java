@@ -5,6 +5,7 @@ import br.com.synapsis.synapsis.auth.AuthService;
 import br.com.synapsis.synapsis.conteudo.dto.ConteudoRequestDTO;
 import br.com.synapsis.synapsis.conteudo.dto.ConteudoResponseDTO;
 import br.com.synapsis.synapsis.shared.dto.MetaResponse;
+import br.com.synapsis.synapsis.shared.enums.StatusConteudoEnum;
 import br.com.synapsis.synapsis.shared.response.PagedResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -34,12 +35,16 @@ public class ConteudoController {
 
     @GetMapping
     public ResponseEntity<PagedResponse<ConteudoResponseDTO>> listar(
+            @RequestParam(required = false) String titulo,
+            @RequestParam(required = false) String tag,
+            @RequestParam(required = false) StatusConteudoEnum status,
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "20") int size
     ) {
         Long userId = authService.getAuthenticatedUserId();
         Pageable pageable = PageRequest.of(page - 1, size);
-        Page<ConteudoResponseDTO> conteudoPage = service.listarTodos(pageable, userId);
+
+        Page<ConteudoResponseDTO> conteudoPage = service.listarTodos(pageable, userId, titulo, tag, status);
 
         PagedResponse<ConteudoResponseDTO> response = new PagedResponse<>(
                 conteudoPage.getContent(),

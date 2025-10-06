@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -44,10 +45,13 @@ public class TagService {
         return tagMapper.toResponse(tag);
     }
 
-    public Page<TagResponseDTO> listarTodos(Pageable pageable, Long userId) {
-        return tagRepository.findByCriadoPor_Id(userId,pageable)
+    public Page<TagResponseDTO> listarTodos(Pageable pageable, Long userId, String nome) {
+        Specification<TagEntity> spec = TagSpecifications.buildSpecification(nome, userId);
+
+        return tagRepository.findAll(spec, pageable)
                 .map(tagMapper::toResponse);
     }
+
 
     @Transactional
     public TagResponseDTO atualizar(Long id, TagRequestDTO dto, Long userId) {
